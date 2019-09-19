@@ -1,0 +1,15 @@
+!!! TODO
+000 code to create random particles and put them in the world
+001 code to "run" the world -- "run()" maybe
+001 run sim
+002 code to regularly display the world
+002 display world
+003 remember to intengrate pygmae into all this
+004 physics
+005 collision
+006 create random particles
+007 display one sim
+008 detect collision
+010 code to display particles in the world (display from one arbitrary side)
+020 code to change the camera (top, bottom, left, right, front, back -- only 6 choices, all orthagonal)
+100 code to display the camera from any angle
