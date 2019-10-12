@@ -14,3 +14,10 @@
 020 code to change the camera (top, bottom, left, right, front, back -- only 6 choices, all orthagonal)
 100 code to display the camera from any angle
 000 why do all my random particals have random accelerations (should all be zero vector)
+110 next try to do 100 partcles and then try playing with colitions
+120 firefly.com; they each pick a random goal and fly toward it (thus testing the brain) and then pick another.
+130 add collisions to fireflys detect fireflies that collide and change their color
+140 now we want fireflies to be larger or smaller, brighter or dimmer depending on how close they are to the "camera"
+150 Now we want to be able to change the camera
+
+
