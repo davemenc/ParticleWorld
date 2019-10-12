@@ -13,3 +13,4 @@
 010 code to display particles in the world (display from one arbitrary side)
 020 code to change the camera (top, bottom, left, right, front, back -- only 6 choices, all orthagonal)
 100 code to display the camera from any angle
+000 why do all my random particals have random accelerations (should all be zero vector)

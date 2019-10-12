@@ -5,15 +5,18 @@ sys.path.insert(0, '../vector3dm')
 from vector3dm import Vector3dm
 
 class Particle:
-	def __init__(self,pos_vect,vel_vect=None):
+	def __init__(self,pos_vect,vel_vect=Vector3dm.zero_vector()):
 		self.position = pos_vect
-		if vel_vect is None:
-			vel_vect = Vector3dm.zero_vector()
+		self.p_pos = self.position # provisional position
 		self.velocity = vel_vect
+		self.p_vel = self.velocity # provisional velocity
 		self.acceleration = Vector3dm.zero_vector()
+		self.size = 10
+		self.color = (255, 255, 255)
+		self.flash_color = (255, 255, 255)
 
 	def __repr__(self):
-		return "position: {}; velocity: {}; acceleration: {}".format(self.position,self.velocity,self.position)
+		return "position: {}; velocity: {}; acceleration: {}".format(self.position,self.velocity,self.acceleration)
 	
 	def brain(self):
 		# this is code that changes the acceleration
