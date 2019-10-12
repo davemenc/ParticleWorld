@@ -18,7 +18,6 @@ YELLOW = ( 255, 255, 0)
 GREY = (128,128,128)
 COLLISION_COLOR = RED
 
-
 class World:
 	def __init__(self,particle_count=10,width=1000,depth=1000,height=1000,wall_type=0):
 		self.world_log = "log1.txt"
@@ -29,7 +28,7 @@ class World:
 		self.log_pointer = open(self.world_log,"at")
 		self.log_data("=======================================================\n")
 		self.clock = None
-		#self.log_pointer.write("==================== {} ====================\n".format(now_str))
+		# self.log_pointer.write("==================== {} ====================\n".format(now_str))
 		# world dimensions
 		self.width = float(width) # total x dimension
 		self.depth = float(depth) # total y dimension
@@ -87,17 +86,19 @@ class World:
 			#self.log_data("=======================================================\n")
 			self.log_pointer.write("==================== {} ====================\n".format(now_str))
 		self.log_pointer.write("{}: {}\n".format(now_str,text))
-
+	def __del__(self):
+		self.log_pointer.close()
 	def __repr__(self):
 		return "width: {}; depth: {}; height: {}; type: {}; particle count: {}".format(self.width,self.depth,self.height,self.wall_type_desc[self.wall_type],len(self.particles))
 
 	def create_world(self,particle_count):
 		for i in range(0,particle_count):
 			position = Vector3dm(random.randrange(int(self.min_x),int(self.max_x)),random.randrange(int(self.min_y),int(self.max_y)),random.randrange(int(self.min_z),int(self.max_z)),"c")
-			position = Vector3dm(50,300,200,"c")
 			self.particles.append(Particle(position))
+
 	def check_position(self,s):
 		pass
+
 	def init_screen(self):
 		# how big is the screen & what is it's relationship to the world
 
@@ -234,7 +235,7 @@ class World:
 		text = font.render(str,1,BLACK)
 		gamedata['self.displaysurf'].blit(text,position)
 if __name__ == "__main__":
-	w = World(1)
+	w = World(100)
 	print(w)
 	for p in w.particles:
 		print(p)

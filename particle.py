@@ -29,4 +29,5 @@ class Particle:
 		self.position = self.position.add(self.velocity)
 
 if __name__ == "__main__":
-	print(Particle(Vector3dm(1,2,3,"c"),Vector3dm(4,5,6,"c")))
+	pass
+	#print(Particle(Vector3dm(1,2,3,"c"),Vector3dm(4,5,6,"c")))
