@@ -1,3 +1,4 @@
+import sys
 import math
 import time
 from particle import Particle
@@ -5,7 +6,6 @@ import pygame
 import random
 from pygame.locals import *
 from pygame.compat import geterror
-import sys
 sys.path.insert(0, '../vector3dm')
 from vector3dm import Vector3dm
 
