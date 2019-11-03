@@ -167,7 +167,7 @@ class World:
 					click_location = event.pos
 
 			#self.log_data("elapsed RT: {}; ST:{}  ".format((self.real_millis() - start_real_millis),self.sim_time//1000))
-			if (self.real_millis() - start_real_millis) >= self.sim_time//100: #choke sim time to real time
+			if True or (self.real_millis() - start_real_millis) >= self.sim_time//100: #choke sim time to real time
 				# Do sim
 				self.impulse()
 			
@@ -217,17 +217,20 @@ class World:
 		
  
 	def collisions(self):
-		for el1 in self.particles:
-			for el2 in self.particles:
+		for el1_idx in range(1,len(self.particles)):
+			for el2_idx in range(0,el1_idx):
+				el1 = self.particles[el1_idx]
+				el2 = self.particles[el2_idx]
 				if self.collision(el1,el2):
 					el1.flash_color = COLLISION_COLOR
+					self.log_data("collision {} and {}".format(el1,el2))
 
 	def distance_squared(self,el1,el2):
 		diff = el1.p_pos.sub(el2.p_pos)
 		return (diff.get_x()**2+diff.get_y()**2+diff.get_z()**2)
 
 	def collision(self,el1,el2):
-		safe_dist = (el1.size+el2.size)**2
+		safe_dist = (el1.col_size+el2.col_size)**2
 		return self.distance_squared(el1,el2)<safe_dist		
 
 	def draw_text(self,str,font,position):
@@ -235,10 +238,10 @@ class World:
 		text = font.render(str,1,BLACK)
 		gamedata['self.displaysurf'].blit(text,position)
 if __name__ == "__main__":
-	w = World(100)
-	print(w)
-	for p in w.particles:
-		print(p)
+	w = World(50)
+	#print(w)
+	#for p in w.particles:
+	#	print(p)
 #	input("press return; esc ends")
 	w.run()
 

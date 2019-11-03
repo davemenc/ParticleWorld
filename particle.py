@@ -11,9 +11,10 @@ class Particle:
 		self.velocity = vel_vect
 		self.p_vel = self.velocity # provisional velocity
 		self.acceleration = Vector3dm.zero_vector()
-		self.size = 10
+		self.col_size = 1 # collision size
+		self.dis_size = 20 # display size
 		self.color = (255, 255, 255)
-		self.flash_color = (255, 255, 255)
+		self.flash_color = (255, 50, 0) # bright red
 
 	def __repr__(self):
 		return "position: {}; velocity: {}; acceleration: {}".format(self.position,self.velocity,self.acceleration)

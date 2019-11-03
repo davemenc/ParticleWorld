@@ -1,20 +1,26 @@
 !!! TODO
-158 detect collision
-160 code to change the camera (top, bottom, left, right, front, back -- only 6 choices, all orthagonal)
-180 code to display the camera from any angle
+001 strip everything I can from world
+002 move as much as possible from the __init__ into a sub that can be overridden
+003 put it all in one file
+004 move the tests into one file
+005 create pixie world
 120 firefly.py; they each pick a random goal and fly toward it (thus testing the brain) and then pick another.
 130 add collisions to fireflys detect fireflies that collide and change their color
 140 now we want fireflies to be larger or smaller, brighter or dimmer depending on how close they are to the "camera"
 150 Now we want to be able to change the camera
-x fix open log file https://stackoverflow.com/questions/865115/how-do-i-correctly-clean-up-a-python-object
+160 code to change the camera (top, bottom, left, right, front, back -- only 6 choices, all orthagonal)
+180 code to display the camera from any angle
 x code to "run" the world -- "run()" maybe
 x code to create random particles and put them in the world
 x code to display particles in the world (display from one arbitrary side)
 x code to regularly display the world
 x collision
 x create random particles
+x detect collision
 x display one sim
 x display world
+x fix open log file https://stackoverflow.com/questions/865115/how-do-i-correctly-clean-up-a-python-object
+x make the collision system avoid self-collisions
 x next try to do 100 partcles and then try playing with colitions
 x physics
 x remember to intengrate pygmae into all this

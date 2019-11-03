@@ -1,4 +1,10 @@
-firefly todo 
+pixie notes 
+1) strip everything I can from world
+2) move as much as possible from the __init__ into a sub that can be overridden
+3) put it all in one file
+4) move the tests into one file
+5) create pixie world
+
 120 firefly.py; they each pick a random goal and fly toward it (thus testing the brain) and then pick another.
 130 add collisions to fireflys detect fireflies that collide and change their color
 140 now we want fireflies to be larger or smaller, brighter or dimmer depending on how close they are to the "camera"
