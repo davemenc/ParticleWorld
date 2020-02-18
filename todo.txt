@@ -1,72 +1,31 @@
 !!! TODO ParticleWorld
-001	collision should be called before collision avoidance 
-000	make collision the first thing but base it not on the location but on the location+velocity: WILL object hit sthis impulse?
-002	collision avoidance and brain need to work together because both aare autonomous and hence need to add up to no more than the acc limit
-020	have gravity be mass based
-160	in pixie brain should try not to overshoot
-210	for each particle, colision should say which item is closest
-230	collision avoidance should change vectors to avoid the closest item
-240	collision avoidance is part of pixie
-250	collision avoidance returns values in m/s
-260	collision avoidance is called by impulse and added into acceleration
-381	could collision routine add the closest neighbor to the particle? Sure be convenient and seems like we're already doing the owrk
-400 add collisions to pixies detect pixies that collide and change their color
-410 now we want pixies to be larger or smaller, brighter or dimmer depending on how close they are to the "camera"
-414 change constraints to respect wall types
-420 Now we want to be able to change the camera
-430 code to change the camera (top, bottom, left, right, front, back -- only 6 choices, all orthagonal)
-440 code to display the camera from any angle
-450 add some of this back into particle world (sizes, maybe collisions)
-460 the particles can't draw themselves but they can return a 100x100 image which is then scaled and located
-470 the world can take the particle image and scale it by one dimension and locate it based on another
-480 the particle can give a list of images based on facing; since they depend on the POV, the world has to pick
-490 design an animation system; the particle knows it but the world displays it.
+x everything is "rolling" off the right hand side of the screen!
+000 aero acc is getting banged to zero; fix that and your pixies might fly!
+100 check brain to make sure it's actually doing what's it's supposed to
+101 check pixie motion to make sure it's moving on it's tracks; I don't understand why it's so fast
+120	make collision the first thing but base it not on the location but on the location+velocity: WILL object hit sthis impulse?
+121	collision should be called before collision avoidance 
+122	collision avoidance and brain need to work together because both aare autonomous and hence need to add up to no more than the acc limit
+260	in pixie brain should try not to overshoot
+310	for each particle, colision should say which item is closest
+330	collision avoidance should change vectors to avoid the closest item
+340	collision avoidance is part of pixie
+350	collision avoidance returns values in m/s
+360	collision avoidance is called by impulse and added into acceleration
+481	could collision routine add the closest neighbor to the particle? Sure be convenient and seems like we're already doing the owrk
+500 add collisions to pixies detect pixies that collide and change their color
+510 now we want pixies to be larger or smaller, brighter or dimmer depending on how close they are to the "camera"
+514 change constraints to respect wall types
+520	have gravity be mass based
+520 Now we want to be able to change the camera
+530 code to change the camera (top, bottom, left, right, front, back -- only 6 choices, all orthagonal)
+540 code to display the camera from any angle
+550 add some of this back into particle world (sizes, maybe collisions)
+560 the particles can't draw themselves but they can return a 100x100 image which is then scaled and located
+570 the world can take the particle image and scale it by one dimension and locate it based on another
+580 the particle can give a list of images based on facing; since they depend on the POV, the world has to pick
+590 design an animation system; the particle knows it but the world displays it.
+600	find out how to set events and so how to set the quit event in pygame
 999	earth moon version
-x	I call brain and it doesn't change although it currently is f'd up
-x	Pixies aerodynamics, gravity,constraints,autonomy,colision avoidance -- make several things that change acc
-x	aero_acc value in particle
-x	aero_drag value in particle (.05) it's maxacc/maxspeed**2 but we don't define maxspeed
-x	be nice if we defined a gravity locus so we could point to it
-x	brain	since we now have a speed limit it might be easier
-x	code to "run" the world -- "run()" maybe
-x	code to create random particles and put them in the world
-x	code to display particles in the world (display from one arbitrary side)
-x	code to regularly display the world
-x	collision
-x	collision avoidance should run after collision 
-x	constraints applies the constraints of the walls to a particle
-x	constraints canges values in particles before they can be applied; for example it zeros velocity before it is added to position
-x	constraints is a method in world
-x	constraints is called in impulse
-x	create ONE pixie in the middle 
-x	create pixie world
-x	create random particles
-x	detect collision
-x	display one sim
-x	display world
-x	fix	open log file https://stackoverflow.com/questions/865115/how-do-i-correctly-clean-up-a-python-object
-x	get all this stuff to work
-x	give him 2 goals, one in the upper right corner and one in the lower right corner
-x	gravity  happens in world.gravity method 
-x	gravity is a vector pointing down with scale of acc
-x	gravity returns an acceleration in m/impulse
-x	in particle brain should be return 0
-x	make the collision system avoid self-collisions
-x	method in particle returns acc due to aerodynamics in m/s
-x	move as much as possible from the __init__ into a sub that can be overridden
-x	move the tests into one file
-x	next try to do 100 partcles and then try playing with colitions
-x	physics
-x	pixie.py; they each pick a random goal and fly toward it (thus testing the brain) and then pick another.
-x	put it all in one file
-x	remember to intengrate pygmae into all this
-x	remove everything from the pixie_world and get it to work on the original particle
-x	run sim
-x	strip everything I can from world
-x	there is a world.gravity_acc value
-x	total drag is -self.aero_drag*velocity.magnitude * velocity.unit()
-x	why do all my random particles have random accelerations (should all be zero vector)
-x	world.impulse calls gravity
-x	world.impulse needs to access aero_acc and divide by 1000000 and multiply by impulse duration so it's in m/impulse and then add it to the total acceleration
-x fix	the pixie movement
-x give pixies a speed limit (that might fix	it)
+x constraints aren't working! it gets way past 1000 in z but get_z returns 76! WRONG
+x constraints should also constrain y & z position and also the r of velocity (20 is a nice number)

@@ -16,7 +16,7 @@ from vector3dm import Vector3dm
 class Pixie(Particle):
 	def __init__(self,pos_vect,vel_vect=Vector3dm.zero_vector()):
 		super().__init__(pos_vect, vel_vect)
-		self.goals = [Vector3dm(0,0,100,"c"),Vector3dm(400,400,100,"c"),Vector3dm(0,0,500,"c"),Vector3dm(-400,-400,800,"c")]
+		self.goals = [Vector3dm(10,-10,100,"c"),Vector3dm(400,400,100,"c"),Vector3dm(0,0,500,"c"),Vector3dm(-400,-400,800,"c")]
 		self.goal_idx = 0 # first goal, increment as we go
 		self.goal = None # brain will calculate first goal
 
@@ -30,12 +30,20 @@ class Pixie(Particle):
 			self.goal_idx += 1
 			if self.goal_idx > len(self.goals):
 				self.goal_idx = 0
+			World.Log_Data("brain New Goal: {} (#{})".format(self.goal,self.goal_idx))
 			return result
 		range = self.position.magnitude(self.goal)
 		if range < CLOSE_RANGE: # we've reached our goal
-			self.goal = None			
+			self.goal = None
+			World.Log_Data("brain REACHED goal")
 			return result
+		World.Log_Data("brain Current goal: {}".format(self.goal))
+		World.Log_Data("brain range: {}".format(range))
+		
 		direction = self.position.point_at_that(self.goal)
+		World.Log_Data("point at {} from {} to {}".format(direction.convert_to_cartesian(),self.position,self.goal))
+
+		
 		if direction.get_r() > MAX_ACC:
 			direction.set_r(MAX_ACC)
 		speed = self.velocity.get_r()
@@ -44,12 +52,15 @@ class Pixie(Particle):
 		arrival = range/speed # seconds to get there
 		if slowing < arrival:
 			result = direction
+			World.Log_Data("brain Speedign Toward Direction: {}".format(result))
+
 		else: 
 			if speed <= CLOSE_RANGE:
 				return Vector3dm.zero_vector() #coast closer
 			elif speed < CLOSE_RANGE+MAX_ACC:
 				direction.set_r(speed - CLOSE_RANGE) #get the speed to around the close_range; fastest we can go to not overshoot
 			result = direction.neg()
+			World.Log_Data("brain SLOWING toward direction: {} (Direction: {}".format(result,direction))
 		return result
 			
 
@@ -67,10 +78,10 @@ class PWorld(World):
 
 if __name__ == "__main__":
 	pw = PWorld()
-	print("pw",pw)
+	World.Log_Data("pw {}".format(pw))
 	for p in pw.particles:
-		print("pixie",p)
+		World.Log_Data("pixie {}".format(p))
 	#print("goals",pw.goals)
-	input("press return; esc ends")
+	#input("press return; esc ends")
 	pw.run()
 	
