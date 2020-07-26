@@ -52,7 +52,7 @@ class Pixie(Particle):
 		arrival = range/speed # seconds to get there
 		if slowing < arrival:
 			result = direction
-			World.Log_Data("brain Speedign Toward Direction: {}".format(result))
+			World.Log_Data("brain Speeding Toward Direction: {}={}".format(result,result.convert_to_cartesian()))
 
 		else: 
 			if speed <= CLOSE_RANGE:

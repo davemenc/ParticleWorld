@@ -47,9 +47,17 @@ class Particle:
 		# this is code that changes the acceleration based on aerodynamic drag
 		# it returns a value in m/s
 		# drag is proportional to speed**2 times drag coef in the vector opposite speed
+
 		speed_squared = self.velocity.magnitude()**2
-		v_drag = self.velocity.unit().neg().mult(speed_squared).mult(self.aero_coef)
-		return v_drag
+		World.Log_Data("aero speed: {}; sqr: {}".format(self.velocity.magnitude(),speed_squared))
+		World.Log_Data("aero velocity: {}".format(self.velocity))
+		World.Log_Data("aero unit: {}->{}".format(self.velocity.unit(),self.velocity.unit().convert_to_cartesian()))
+		World.Log_Data("aero neg: {}".format(self.velocity.unit().neg()))
+		World.Log_Data("aero * speed sqrd: {}".format(self.velocity.unit().neg().mult(speed_squared)))
+		
+		a_drag = self.velocity.unit().neg().mult(speed_squared).mult(self.aero_coef)
+		World.Log_Data("aero a_drag: {}".format(a_drag))
+		return a_drag
 
 """ World Class: collection of entities that get processes as a whole: physics, display, collisions, etc """
 class World:
@@ -246,7 +254,7 @@ class World:
 		#Draw Everything
 		#self.display_world()
 		while self.going:
-			#self.clock.tick(20)
+			self.clock.tick(50)
 			#Handle Input Events
 			World.Log_Data("_______________ R{}:S{} _______________".format((self.real_millis()-start_real_millis)*self.impulse_duration,self.sim_time))
 			for event in pygame.event.get():
@@ -330,8 +338,9 @@ class World:
 			World.Log_Data("{}: brain: {}".format(i,brain_acc.convert_to_cartesian()))
 			
 			aero_acc = el.aero_acc()
+			World.Log_Data("{}: pre set aero_acc: {}".format(i,aero_acc.convert_to_cartesian()))
 			aero_acc.set_r(brain_acc.get_r()*float(self.impulse_duration)/World.MICROS_IN_SEC)
-			#World.Log_Data("{}: aero_acc: {}".format(i,aero_acc.convert_to_cartesian()))
+			World.Log_Data("{}: post set aero_acc: {}".format(i,aero_acc.convert_to_cartesian()))
 
 			gravity_acc = self.gravity(el)
 			physics_acc = self.physics(el)
@@ -339,11 +348,11 @@ class World:
 			World.Log_Data("{}: impulse pre:{}".format(i,el))
 
 			el.acceleration = Vector3dm.zero_vector().add(brain_acc).add(aero_acc).add(gravity_acc).add(physics_acc)
-			
-			World.Log_Data("{}: impulse post:{}".format(i,el))
 
 			el.velocity = el.velocity.add(el.acceleration)
 			el.position = el.position.add(el.velocity)
+
+			World.Log_Data("{}: impulse post:{}".format(i,el))
 
 			self.constraints(el) # change the particle based on wall/space constraints
 			World.Log_Data("{}: impulse new: {}".format(i,el))
